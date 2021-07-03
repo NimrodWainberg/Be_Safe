@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BeSafe</string>
+    <string name="facebook_app_id">335245034933705</string>
+    <string name="fb_login_protocol_scheme">fb335245034933705</string>
+</resources>
