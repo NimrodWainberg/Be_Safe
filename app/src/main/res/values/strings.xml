@@ -2,4 +2,8 @@
     <string name="app_name">BeSafe</string>
     <string name="facebook_app_id">335245034933705</string>
     <string name="fb_login_protocol_scheme">fb335245034933705</string>
+    <string name="btn_record">Record</string>
+    <string name="btn_record_page">Record</string>
+    <string name="btn_stop">Stop</string>
+    <string name="btn_play">Play</string>
 </resources>
