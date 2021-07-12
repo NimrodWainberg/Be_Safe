@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
             // User is not logged in
             if(currentAccessToken == null){
                 LoginManager.getInstance().logOut();
+                Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
                 textView.setText("");
                 imageView.setImageResource(0);
             }
