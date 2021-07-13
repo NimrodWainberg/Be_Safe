@@ -42,4 +42,13 @@
         app:layout_constraintStart_toEndOf="@+id/btn_stop"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_centerInParent="true"
+        app:lottie_autoPlay="true"
+        android:id="@+id/lottie"
+        android:elevation="5dp"
+        app:lottie_rawRes="@raw/record_on"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

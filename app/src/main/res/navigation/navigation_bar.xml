@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_bar"
+    app:startDestination="@id/mainActivity">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.besafe.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <activity
+        android:id="@+id/recordsActivity"
+        android:name="com.example.besafe.RecordsActivity"
+        android:label="activity_records"
+        tools:layout="@layout/activity_records" />
+    <activity
+        android:id="@+id/sendActivity"
+        android:name="com.example.besafe.SendActivity"
+        android:label="activity_send"
+        tools:layout="@layout/activity_send" />
+</navigation>

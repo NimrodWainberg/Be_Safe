@@ -45,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // For navigation button
+        // val
+        Button bottomNavigationView = findViewById();
+
         imageView = findViewById(R.id.profilePic);
         textView = findViewById(R.id.profileName);
 
