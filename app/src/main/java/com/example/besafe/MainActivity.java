@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private LoginButton loginButton;
     private ImageView imageView;
     private TextView textView;
+    private com.google.android.material.bottomnavigation.BottomNavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // For navigation button
-        // val
-        Button bottomNavigationView = findViewById();
+        navigationView = findViewById(R.id.bottom_navigation);
 
         imageView = findViewById(R.id.profilePic);
         textView = findViewById(R.id.profileName);
