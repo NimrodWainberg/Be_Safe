@@ -6,49 +6,90 @@
     android:layout_height="match_parent"
     tools:context=".RecordsActivity">
 
-    <Button
+    <ImageButton
+        android:id="@+id/btn_stop"
+        android:layout_width="78dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="528dp"
+        android:layout_marginEnd="44dp"
+        android:onClick="btnStopPressed"
+        app:layout_constraintEnd_toStartOf="@+id/btn_play"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toEndOf="@+id/btn_record"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_stop_24" />
+
+    <ImageButton
+        android:id="@+id/btn_play"
+        android:layout_width="78dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="528dp"
+        android:layout_marginEnd="64dp"
+        android:onClick="btnPlayPressed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
+
+    <ImageButton
         android:id="@+id/btn_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="341dp"
+        android:layout_width="78dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="528dp"
         android:onClick="btnRecordPressed"
-        android:text="@string/btn_record"
-        app:layout_constraintEnd_toStartOf="@+id/btn_stop"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_record" />
+
+    <TextView
+        android:id="@+id/voiceRecognition_txt"
+        android:layout_width="383dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="304dp"
+        android:layout_marginEnd="14dp"
+        android:text="@string/voiceRecognition"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.408"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_stop"
+        android:id="@+id/voiceRecognition_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="341dp"
-        android:onClick="btnStopPressed"
-        android:text="@string/btn_stop"
-        app:layout_constraintEnd_toStartOf="@+id/btn_play"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_record"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="341dp"
-        android:onClick="btnPlayPressed"
-        android:text="@string/btn_play"
+        android:layout_marginStart="158dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginBottom="164dp"
+        android:onClick="startRecognizeButton"
+        android:text="@string/voiceRecognition_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_stop"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:layout_centerInParent="true"
-        app:lottie_autoPlay="true"
-        android:id="@+id/lottie"
-        android:elevation="5dp"
-        app:lottie_rawRes="@raw/record_on"/>
+    <ImageButton
+        android:id="@+id/voiceRecognition_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="244dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="244dp"
+        android:backgroundTint="#E91E63"
+        android:onClick="stopRecognizeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_btn"
+        app:srcCompat="@drawable/ic_stop" />
+
+    <!--        android:layout_width="400dp"-->
+<!--        android:layout_height="400dp"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        app:lottie_autoPlay="true"-->
+<!--        android:id="@+id/lottie"-->
+<!--        android:elevation="5dp"-->
+<!--        app:lottie_rawRes="@raw/record_on"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

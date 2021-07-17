@@ -1,5 +1,6 @@
 package com.example.besafe;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.AccessToken;
@@ -14,12 +15,14 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private LoginButton loginButton;
     private ImageView imageView;
     private TextView textView;
-    private com.google.android.material.bottomnavigation.BottomNavigationView navigationView;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,36 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // For navigation button
-        navigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        // Main Activity selected is home
+        bottomNavigationView.setSelectedItemId(R.id.home);
+        // Move to the other pages
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+
+                    case R.id.mainActivity:
+                        return true;
+
+
+                    case R.id.recordsActivity:
+                        // open the correct activity
+                        startActivity(new Intent(getApplicationContext(), RecordsActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
+                    case R.id.sendActivity:
+                        // open the correct activity
+                        startActivity(new Intent(getApplicationContext(), SendActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
+            }
+
+        });
+
 
         imageView = findViewById(R.id.profilePic);
         textView = findViewById(R.id.profileName);
@@ -104,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                     // User name
                     String name = object.getString("name");
                     // Show it for the user
-                    textView.setText(name);
+                    textView.setText("Hello "+" " + name);
                     // using picasso
                     Picasso.get().load("https://graph.facebook.com/" + id + "/picture?type=large")
                         .into(imageView);
@@ -124,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         graphRequest.setParameters(bundle);
         // execute async (on a different intent in the background)
         graphRequest.executeAsync();
-        
+
     }
 
     // Open Record activity

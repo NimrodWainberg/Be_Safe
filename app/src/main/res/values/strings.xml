@@ -6,4 +6,6 @@
     <string name="btn_record_page">Record</string>
     <string name="btn_stop">Stop</string>
     <string name="btn_play">Play</string>
+    <string name="voiceRecognition">Voice recognition</string>
+    <string name="voiceRecognition_btn">Voice recognition</string>
 </resources>
