@@ -8,4 +8,5 @@
     <string name="btn_play">Play</string>
     <string name="voiceRecognition">Voice recognition</string>
     <string name="voiceRecognition_btn">Voice recognition</string>
+    <string name="txt_language">ENGLISH</string>
 </resources>
