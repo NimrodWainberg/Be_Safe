@@ -1,6 +1,7 @@
 package com.example.besafe;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.AccessToken;
@@ -19,7 +20,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -43,11 +47,75 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
     private TextView textView;
     BottomNavigationView bottomNavigationView;
+    // For language translate
+    TextView language_dialog, helloToApp;
+    boolean language_selected = true;
+    Context context;
+    Resources resources;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        // Translate dialog
+        language_dialog = (TextView) findViewById(R.id.dialog_language);
+        helloToApp = (TextView) findViewById(R.id.welcome_txt);
+
+        language_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String[] language = {"ENGLISH", "עברית"};
+
+                int checkedItem;
+
+                // check if the language has changed
+                if (language_selected) {
+                    checkedItem = 0;
+                } else {
+                    checkedItem = 1;
+                }
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+                // choose a language from dialog
+                builder.setTitle("Select a language").setSingleChoiceItems(language, checkedItem, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Show the language in the button
+                        language_dialog.setText(language[which]);
+
+                        // use the suitable strings.xml
+                        if(language[which].equals("ENGLISH")){
+
+                            context = LocaleHelper.setLocale(MainActivity.this,"en");
+                            resources = context.getResources();
+
+                            helloToApp.setText(resources.getString(R.string.welcome_txt));
+                        }
+
+                        if (language[which].equals("עברית")){
+
+                            context = LocaleHelper.setLocale(MainActivity.this,"iw-rlL");
+                            resources = context.getResources();
+
+                            helloToApp.setText(resources.getString(R.string.welcome_txt));
+                        }
+                    }
+                })
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                // create and show
+                builder.create().show();
+            }
+        });
 
         // For navigation button
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -113,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
             public void onError(FacebookException exception) {
                 // App code
                 //Popup
-                Toast.makeText(MainActivity.this, "Error: "+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Error: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -131,17 +199,18 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Demo", object.toString());
                 // Obtain info
                 try {
+                    // Remove welcome text
+                    helloToApp.setText("");
                     // User picture
                     String id = object.getString("id");
                     // User name
                     String name = object.getString("name");
                     // Show it for the user
-                    textView.setText("Hello "+" " + name);
+                    textView.setText("Hello " + " " + name);
                     // using picasso
                     Picasso.get().load("https://graph.facebook.com/" + id + "/picture?type=large")
-                        .into(imageView);
-                }
-                catch (JSONException e) {
+                            .into(imageView);
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
@@ -160,17 +229,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Open Record activity
-    public void openRecordPage(){
+    public void openRecordPage() {
         Intent intent = new Intent(this, RecordsActivity.class);
         startActivity(intent);
     }
 
     // To know if the user is logged in or logged out
-    AccessTokenTracker accessTokenTracker  = new AccessTokenTracker() {
+    AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
         @Override
         protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
             // User is not logged in
-            if(currentAccessToken == null){
+            if (currentAccessToken == null) {
                 LoginManager.getInstance().logOut();
                 Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
                 textView.setText("");

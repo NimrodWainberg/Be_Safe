@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">תהי בטוחה</string>
+    <string name="facebook_app_id">335245034933705</string>
+    <string name="fb_login_protocol_scheme">fb335245034933705</string>
+    <string name="btn_record">הקלטה</string>
+    <string name="btn_record_page">הקלטה</string>
+    <string name="btn_stop">עצירה</string>
+    <string name="btn_play">שמיעה</string>
+    <string name="voiceRecognition">זיהוי קולי</string>
+    <string name="voiceRecognition_btn">זיהוי קולי</string>
+    <string name="txt_language">עברית</string>
+    <string name="selectedlanguage">עברית</string>
+    <string name="welcome_txt">ברוכים הבאים</string>
+</resources>
