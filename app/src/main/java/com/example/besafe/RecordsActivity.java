@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -31,93 +32,69 @@ import static android.Manifest.permission.RECORD_AUDIO;
 
 public class RecordsActivity extends AppCompatActivity {
 
+    // For recording
     private static int MICROPHONE_PERMISSION_CODE = 200;
     MediaRecorder mediaRecorder;
     MediaPlayer mediaPlayer;
     BottomNavigationView bottomNavigationView;
-    // For voice commands
+
+    // For voice recognition
     private SpeechRecognizer speechRecognizer;
     private Intent intentRecognizer;
     private TextView textView;
+    final int recognizerSpeechIntent = 1;
+
+
+    // Getting the data from voice recognition
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if we receive the data (string from speechRecognizer)
+        if (data != null) {
+            // check if the result was ok
+            if (requestCode == recognizerSpeechIntent && requestCode == RESULT_OK) {
+                // string array, store the words from speechRecognizer into an array
+                 final ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                 // check that we have there any strings
+                if (!results.isEmpty()) {
+                    Log.d("RECOGNIZER", results.toString());
+                    // get the word  from the array
+                    final  String keyWord = results.get(0);
+                    // Popup
+                    Toast.makeText(RecordsActivity.this, " The key word is:" + keyWord, Toast.LENGTH_SHORT).show();
+
+                    // Write the text inside
+                    textView.setText(keyWord);
+
+
+                    // check for key word
+                    if (keyWord.equalsIgnoreCase("bilbi")) {
+                        // start record
+                        handleBtnRecordPressed();
+                        Toast.makeText(RecordsActivity.this, " Record as been started with: " + keyWord, Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Log.d("RECOGNIZER", "Empty results");
+                }
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_records);
+
+        // For voice recognition
         intentRecognizer = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        // put Extra- add more parameters to the function
         // We can specified a specific language
-        intentRecognizer.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        // intentRecognizer.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        // Language for voice recognition is EN
+        intentRecognizer.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en")
+          // for 1 word
+         .putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);//.putExtra(RecognizerIntent.);
 
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-        speechRecognizer.setRecognitionListener(new RecognitionListener() {
-            @Override
-            public void onReadyForSpeech(Bundle params) {
-
-            }
-
-            @Override
-            public void onBeginningOfSpeech() {
-                //Popup
-                Toast.makeText(RecordsActivity.this, " Start Voice recognition", Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onRmsChanged(float rmsdB) {
-
-            }
-
-            @Override
-            public void onBufferReceived(byte[] buffer) {
-
-            }
-
-            @Override
-            public void onEndOfSpeech() {
-                //Popup
-                Toast.makeText(RecordsActivity.this, " Start Voice recognition", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(int error) {
-
-            }
-
-            @Override
-            public void onResults(Bundle results) {
-
-                //Popup
-                Toast.makeText(RecordsActivity.this, " Start Voice recognition", Toast.LENGTH_SHORT).show();
-
-                Log.d("ONRESULT", "STARTVOICERECOGNITION ");
-
-                // give the list of the results
-                ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                String string = "";
-                if (matches != null) {
-                    // Get the string from the start
-                    string = matches.get(0);
-                    // write the text in the text view
-                    textView.setText(string);
-
-                    // Check for specific word
-                    if(string.toLowerCase().equals("bilbi")){
-                        // TODO: Call to police
-
-                    }
-                }
-            }
-
-            @Override
-            public void onPartialResults(Bundle partialResults) {
-
-            }
-
-            @Override
-            public void onEvent(int eventType, Bundle params) {
-
-            }
-        });
 
         // for voice recognition
         textView = findViewById(R.id.voiceRecognition_txt);
@@ -162,20 +139,26 @@ public class RecordsActivity extends AppCompatActivity {
 
     // Voice Recognition button pressed
     public void startRecognizeButton(View view) {
+        // TODO
+        Log.d("STARTRECOGNITION", "startRecognizeButton: ");
+        //
+        startActivityForResult(intentRecognizer, recognizerSpeechIntent);
+
         // Start speechRecognize
-        speechRecognizer.startListening(intentRecognizer);
+        //speechRecognizer.startListening(intentRecognizer);
 
     }
 
     // Voice Recognition button stopped pressed
     public void stopRecognizeButton(View view) {
-        // Start speechRecognize
+        // TODO
+        Log.d("STOPRECOGNITION", "stopRecognizeButton: ");
+        // stop speechRecognize
         speechRecognizer.stopListening();
     }
 
     // Record audio
     public void btnRecordPressed(View v) {
-
         handleBtnRecordPressed();
     }
 
@@ -200,11 +183,20 @@ public class RecordsActivity extends AppCompatActivity {
 
     // Stop recording
     public void btnStopPressed(View v) {
-        mediaRecorder.stop();
-        mediaRecorder.release();
-        mediaRecorder = null;
+        //TODO
+        Log.d("STOPRegularRecord", "btnStopPressed: ");
 
-        Toast.makeText(this, "Recording is stopped", Toast.LENGTH_LONG).show();
+        try {
+            mediaRecorder.stop();
+            mediaRecorder.release();
+            mediaRecorder = null;
+
+            Toast.makeText(this, "Recording is stopped", Toast.LENGTH_LONG).show();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     // Play the record

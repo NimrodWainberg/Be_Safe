@@ -7,40 +7,40 @@
     tools:context=".RecordsActivity">
 
     <ImageButton
-        android:id="@+id/btn_stop"
+        android:id="@+id/btn_record"
         android:layout_width="78dp"
         android:layout_height="53dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="488dp"
-        android:layout_marginEnd="44dp"
-        android:onClick="btnStopPressed"
-        app:layout_constraintEnd_toStartOf="@+id/btn_play"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toEndOf="@+id/btn_record"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_stop_24" />
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="84dp"
+        android:onClick="btnRecordPressed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_txt"
+        app:srcCompat="@drawable/ic_record" />
 
     <ImageButton
         android:id="@+id/btn_play"
         android:layout_width="78dp"
         android:layout_height="53dp"
-        android:layout_marginTop="488dp"
-        android:layout_marginEnd="68dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="64dp"
         android:onClick="btnPlayPressed"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_txt"
         app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
 
     <ImageButton
-        android:id="@+id/btn_record"
+        android:id="@+id/btn_stop"
         android:layout_width="78dp"
         android:layout_height="53dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="488dp"
-        android:onClick="btnRecordPressed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_record" />
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="52dp"
+        android:onClick="btnStopPressed"
+        app:layout_constraintEnd_toStartOf="@+id/btn_play"
+        app:layout_constraintHorizontal_bias="0.363"
+        app:layout_constraintStart_toEndOf="@+id/btn_record"
+        app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_txt"
+        app:srcCompat="@drawable/ic_baseline_stop_24" />
 
     <TextView
         android:id="@+id/voiceRecognition_txt"
@@ -69,7 +69,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.455"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_stop"
+        app:layout_constraintVertical_bias="0.698" />
 
     <ImageButton
         android:id="@+id/voiceRecognition_stop"
