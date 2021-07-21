@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -84,6 +85,12 @@ public class RecordsActivity extends AppCompatActivity {
 
             @Override
             public void onResults(Bundle results) {
+
+                //Popup
+                Toast.makeText(RecordsActivity.this, " Start Voice recognition", Toast.LENGTH_SHORT).show();
+
+                Log.d("ONRESULT", "STARTVOICERECOGNITION ");
+
                 // give the list of the results
                 ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 String string = "";
@@ -94,9 +101,9 @@ public class RecordsActivity extends AppCompatActivity {
                     textView.setText(string);
 
                     // Check for specific word
-                    if(string == "Bilbi"){
-                     //   View view = something;
-                     //   btnRecordPressed(view);
+                    if(string.toLowerCase().equals("bilbi")){
+                        // TODO: Call to police
+
                     }
                 }
             }
@@ -117,7 +124,7 @@ public class RecordsActivity extends AppCompatActivity {
 
         // For navigation button
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        // Main Activity selected is home
+        // Current activity selected is Records
         bottomNavigationView.setSelectedItemId(R.id.recordsActivity);
         // Move to the other pages
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -168,6 +175,11 @@ public class RecordsActivity extends AppCompatActivity {
 
     // Record audio
     public void btnRecordPressed(View v) {
+
+        handleBtnRecordPressed();
+    }
+
+    private void handleBtnRecordPressed(){
         try {
             mediaRecorder = new MediaRecorder();
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -184,8 +196,6 @@ public class RecordsActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
     // Stop recording

@@ -22,8 +22,8 @@ public class SendActivity extends AppCompatActivity {
 
         // For navigation button
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        // Main Activity selected is home
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        // Current activity selected is sendActivity
+        bottomNavigationView.setSelectedItemId(R.id.sendActivity);
         // Move to the other pages
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 

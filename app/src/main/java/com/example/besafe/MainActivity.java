@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d("MAINACTIVITY", "MAINACTIVITY ");
+
 
         // Translate dialog
         language_dialog = (TextView) findViewById(R.id.dialog_language);
@@ -119,12 +121,15 @@ public class MainActivity extends AppCompatActivity {
 
         // For navigation button
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        Log.d("BOTTOM", bottomNavigationView+"");
         // Main Activity selected is home
         bottomNavigationView.setSelectedItemId(R.id.home);
         // Move to the other pages
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Log.d("ITEMID", "TEST");
+                Log.d("ITEMID", item.getItemId()+"");
                 switch (item.getItemId()) {
 
                     case R.id.mainActivity:
