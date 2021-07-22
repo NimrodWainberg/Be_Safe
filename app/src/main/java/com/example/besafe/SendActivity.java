@@ -3,9 +3,16 @@ package com.example.besafe;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -13,6 +20,12 @@ public class SendActivity extends AppCompatActivity {
 
     //
     BottomNavigationView bottomNavigationView;
+
+    // Shared preferences
+    EditText keyWord, phone;
+    Button save_btn;
+    SharedPreferences sp;
+    String keyWordStr, phoneStr;
 
 
     @Override
@@ -50,6 +63,37 @@ public class SendActivity extends AppCompatActivity {
                 return false;
             }
 
+        });
+
+        // Shared preferences
+        keyWord = findViewById(R.id.key_word);
+        phone = findViewById(R.id.phone_by_user);
+        save_btn = findViewById(R.id.save_btn);
+
+        // Name + Mode
+        sp = getSharedPreferences("BeSafeConfiguration", Context.MODE_PRIVATE);
+
+        // Listener save button
+        save_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the strings
+                keyWordStr = keyWord.getText().toString();
+                phoneStr  = phone.getText().toString();
+
+                // Shared Preferences editor
+                SharedPreferences.Editor editor = sp.edit();
+
+                // pass the data that user have entered
+                editor.putString("safe_word", keyWordStr);
+                editor.putString("emergency_phone", phoneStr);
+                // commit
+                editor.commit();
+                // Popup for the user
+                Toast.makeText(SendActivity.this, "Information as been saved", Toast.LENGTH_LONG).show();
+
+                Log.d("SHAREDPREFERENCES", "Information as been saved ");
+            }
         });
     }
 }

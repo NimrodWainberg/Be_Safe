@@ -16,4 +16,7 @@
     <string name="nav_send">Text</string>
     <string name="emergency_Contact">Emergency contact number</string>
     <string name="key_Word">Key word</string>
+    <string name="save_text">Save</string>
+    <string name="safe_word">Please enter a safe word</string>
+    <string name="phone_emergency">Please enter a phone number for emergency</string>
 </resources>

@@ -17,4 +17,8 @@
     <string name="nav_send">טקסט</string>
     <string name="emergency_Contact">מספר חירום</string>
     <string name="key_Word">מילת מפתח</string>
+    <string name="save_text">שמירה</string>
+    <string name="safe_word">נא להקליד מילת מפתח</string>
+    <string name="phone_emergency">נא להקליד מספר חירום</string>
+
 </resources>

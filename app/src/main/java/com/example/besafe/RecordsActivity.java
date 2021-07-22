@@ -1,8 +1,10 @@
 package com.example.besafe;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -44,6 +46,11 @@ public class RecordsActivity extends AppCompatActivity {
     private TextView textView;
     final int recognizerSpeechIntent = 1;
 
+    // For keyWord, contact number from user
+     TextView showKeyWord, showPhone;
+     SharedPreferences sp;
+     String stringkeyWord, stringPhone;
+
 
     // Getting the data from voice recognition
     @Override
@@ -81,7 +88,7 @@ public class RecordsActivity extends AppCompatActivity {
                     // check for key word
                     if (keyWord.equalsIgnoreCase("hello")) {
 
-                        Log.d("MATCHWORD", (keyWord +" ");
+                        Log.d("MATCHWORD", keyWord +" ");
                         // start record
                         handleBtnRecordPressed();
                         Toast.makeText(RecordsActivity.this, " Record as been started with: " + keyWord, Toast.LENGTH_SHORT).show();
@@ -101,6 +108,20 @@ public class RecordsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_records);
+
+        // For keyWord, contact number from user
+        showKeyWord = findViewById(R.id.showkeyWord);
+        showPhone = findViewById(R.id.showPhone);
+        // extract the data from sharedPreferences
+        sp = getSharedPreferences("BeSafeConfiguration", Context.MODE_PRIVATE);
+        stringkeyWord = sp.getString("safe_word", "");
+        stringPhone = sp.getString("emergency_phone", "");
+
+        // set text
+        showKeyWord.setText(stringkeyWord);
+        showPhone.setText(stringPhone);
+
+
 
         // For voice recognition
         intentRecognizer = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);

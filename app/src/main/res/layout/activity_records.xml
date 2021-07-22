@@ -37,7 +37,7 @@
         android:layout_marginEnd="52dp"
         android:onClick="btnStopPressed"
         app:layout_constraintEnd_toStartOf="@+id/btn_play"
-        app:layout_constraintHorizontal_bias="0.363"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_record"
         app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_txt"
         app:srcCompat="@drawable/ic_baseline_stop_24" />
@@ -47,14 +47,15 @@
         android:layout_width="383dp"
         android:layout_height="69dp"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="304dp"
+        android:layout_marginTop="91dp"
         android:layout_marginEnd="14dp"
         android:text="@string/voiceRecognition"
         android:textAlignment="center"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.408"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/showPhone" />
 
 
     <Button
@@ -68,7 +69,7 @@
         android:text="@string/voiceRecognition_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_stop"
         app:layout_constraintVertical_bias="0.698" />
@@ -83,7 +84,7 @@
         android:backgroundTint="#E91E63"
         android:onClick="stopRecognizeButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_btn"
         app:srcCompat="@drawable/ic_stop" />
@@ -98,12 +99,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu" />
 
+    <TextView
+        android:id="@+id/showkeyWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="294dp"
+        android:text="hello"
+        android:textColor="#FF69B4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/showPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="294dp"
+        android:text="100"
+        android:textColor="#FF69B4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showkeyWord" />
+
     <!--        android:layout_width="400dp"-->
-<!--        android:layout_height="400dp"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        app:lottie_autoPlay="true"-->
-<!--        android:id="@+id/lottie"-->
-<!--        android:elevation="5dp"-->
-<!--        app:lottie_rawRes="@raw/record_on"/>-->
+    <!--        android:layout_height="400dp"-->
+    <!--        android:layout_centerInParent="true"-->
+    <!--        app:lottie_autoPlay="true"-->
+    <!--        android:id="@+id/lottie"-->
+    <!--        android:elevation="5dp"-->
+    <!--        app:lottie_rawRes="@raw/record_on"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
