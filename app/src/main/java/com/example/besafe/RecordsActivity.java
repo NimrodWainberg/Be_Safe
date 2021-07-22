@@ -49,26 +49,39 @@ public class RecordsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        Log.d("ONACTIVITY", "onActivityResult: ");
+
         // check if we receive the data (string from speechRecognizer)
         if (data != null) {
+
+            Log.d("DATA", "data not null ");
+
             // check if the result was ok
-            if (requestCode == recognizerSpeechIntent && requestCode == RESULT_OK) {
+            if (requestCode == recognizerSpeechIntent && resultCode == RESULT_OK) {
+
+                Log.d("OK", "Line 63 was ok");
+
                 // string array, store the words from speechRecognizer into an array
-                 final ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                 // check that we have there any strings
+                final ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                // check that we have there any strings
                 if (!results.isEmpty()) {
                     Log.d("RECOGNIZER", results.toString());
                     // get the word  from the array
-                    final  String keyWord = results.get(0);
+                    final String keyWord = results.get(0);
                     // Popup
                     Toast.makeText(RecordsActivity.this, " The key word is:" + keyWord, Toast.LENGTH_SHORT).show();
 
                     // Write the text inside
                     textView.setText(keyWord);
 
+                    // TODO: make a call/ send message to emergency contact
+
 
                     // check for key word
-                    if (keyWord.equalsIgnoreCase("bilbi")) {
+                    if (keyWord.equalsIgnoreCase("hello")) {
+
+                        Log.d("MATCHWORD", (keyWord +" ");
                         // start record
                         handleBtnRecordPressed();
                         Toast.makeText(RecordsActivity.this, " Record as been started with: " + keyWord, Toast.LENGTH_SHORT).show();
@@ -76,6 +89,10 @@ public class RecordsActivity extends AppCompatActivity {
                 } else {
                     Log.d("RECOGNIZER", "Empty results");
                 }
+            } else {
+                Log.d("OK", "Line 63 not ok: ");
+                Log.d("RecognizerSpeechIntent", recognizerSpeechIntent +"");
+
             }
         }
     }

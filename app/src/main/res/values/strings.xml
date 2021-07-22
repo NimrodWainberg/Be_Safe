@@ -14,4 +14,6 @@
     <string name="nav_home">Home</string>
     <string name="nav_records">Records</string>
     <string name="nav_send">Text</string>
+    <string name="emergency_Contact">Emergency contact number</string>
+    <string name="key_Word">Key word</string>
 </resources>

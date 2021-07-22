@@ -15,4 +15,6 @@
     <string name="nav_home">בית</string>
     <string name="nav_records">הקלטות</string>
     <string name="nav_send">טקסט</string>
+    <string name="emergency_Contact">מספר חירום</string>
+    <string name="key_Word">מילת מפתח</string>
 </resources>
