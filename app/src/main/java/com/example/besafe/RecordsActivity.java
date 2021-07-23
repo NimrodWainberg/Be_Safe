@@ -310,6 +310,7 @@ public class RecordsActivity extends AppCompatActivity {
     }
 
 
+    // Check if user has microphone
     private boolean isMicrophonePresent() {
         if (this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MICROPHONE)) {
             return true;
