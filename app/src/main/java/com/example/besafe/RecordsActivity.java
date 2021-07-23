@@ -8,14 +8,18 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
@@ -38,6 +43,8 @@ public class RecordsActivity extends AppCompatActivity {
     private static int MICROPHONE_PERMISSION_CODE = 200;
     MediaRecorder mediaRecorder;
     MediaPlayer mediaPlayer;
+    ImageButton record_on, record_stop, record_play;
+
     BottomNavigationView bottomNavigationView;
 
     // For voice recognition
@@ -51,6 +58,13 @@ public class RecordsActivity extends AppCompatActivity {
      SharedPreferences sp;
      String stringkeyWord, stringPhone;
 
+     // For Lottie Animation
+     LottieAnimationView record_on_animation;
+
+     // For calling
+    private static final int REQUEST_PHONE_CALL = 1;
+
+
 
     // Getting the data from voice recognition
     @Override
@@ -59,6 +73,7 @@ public class RecordsActivity extends AppCompatActivity {
 
         Log.d("ONACTIVITY", "onActivityResult: ");
 
+        // Speech recognizer
         // check if we receive the data (string from speechRecognizer)
         if (data != null) {
 
@@ -86,12 +101,19 @@ public class RecordsActivity extends AppCompatActivity {
 
 
                     // check for key word
-                    if (keyWord.equalsIgnoreCase("hello")) {
+                    if (stringkeyWord == "") {
+                        stringkeyWord = "hello";
+                    }
+
+                    if (keyWord.equalsIgnoreCase(stringkeyWord)) {
 
                         Log.d("MATCHWORD", keyWord +" ");
                         // start record
                         handleBtnRecordPressed();
                         Toast.makeText(RecordsActivity.this, " Record as been started with: " + keyWord, Toast.LENGTH_SHORT).show();
+
+                        // call to emergency number
+                        callEmergency();
                     }
                 } else {
                     Log.d("RECOGNIZER", "Empty results");
@@ -118,9 +140,16 @@ public class RecordsActivity extends AppCompatActivity {
         stringPhone = sp.getString("emergency_phone", "");
 
         // set text
-        showKeyWord.setText(stringkeyWord);
-        showPhone.setText(stringPhone);
+        if (stringkeyWord != null) {
+            showKeyWord.setText(stringkeyWord);
+        }
 
+        if (stringkeyWord != null) {
+            showPhone.setText(stringPhone);
+        }
+
+        // Lottie Animation
+        record_on_animation = findViewById(R.id.record_animation);
 
 
         // For voice recognition
@@ -173,6 +202,12 @@ public class RecordsActivity extends AppCompatActivity {
         if (isMicrophonePresent()) {
             getMicrophonePermission();
         }
+
+
+        // Calling permission
+        if (ContextCompat.checkSelfPermission(RecordsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(RecordsActivity.this, new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
+        }
     }
 
     // Voice Recognition button pressed
@@ -185,6 +220,20 @@ public class RecordsActivity extends AppCompatActivity {
         // Start speechRecognize
         //speechRecognizer.startListening(intentRecognizer);
 
+    }
+
+    // For calling to a emergency number
+    public void callEmergency(){
+        // check if there is a number
+        if (stringPhone == null) {
+            Toast.makeText(getApplicationContext(), "Please enter a number first !", Toast.LENGTH_LONG).show();
+        } else {
+            String s = "tel:" + stringPhone;
+            // Intent for calling
+           Intent intent = new Intent(Intent.ACTION_CALL);
+           intent.setData(Uri.parse(s));
+           startActivity(intent);
+        }
     }
 
     // Voice Recognition button stopped pressed
@@ -202,6 +251,12 @@ public class RecordsActivity extends AppCompatActivity {
 
     private void handleBtnRecordPressed(){
         try {
+            // play animation
+            record_on_animation.playAnimation();
+            // TODO
+            // change record button image
+            record_on.setBackgroundResource(R.drawable.ic_red_record);
+
             mediaRecorder = new MediaRecorder();
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -223,6 +278,10 @@ public class RecordsActivity extends AppCompatActivity {
     public void btnStopPressed(View v) {
         //TODO
         Log.d("STOPRegularRecord", "btnStopPressed: ");
+
+        // stop animation
+        //record_on_animation.;
+
 
         try {
             mediaRecorder.stop();
