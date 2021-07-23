@@ -41,9 +41,6 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
 
 
-    CallbackManager callbackManager = CallbackManager.Factory.create();
-    private static final String EMAIL = "email";
-    private LoginButton loginButton;
     private ImageView imageView;
     private TextView textView;
     BottomNavigationView bottomNavigationView;
@@ -153,109 +150,44 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        //Facebook
 
+        // Show user facebook login
+        String name = getIntent().getStringExtra("Name");
+        String pictureId = getIntent().getStringExtra("Picture_id");
         imageView = findViewById(R.id.profilePic);
         textView = findViewById(R.id.profileName);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        // Show it for the user
+        // using picasso
+        Picasso.get().load("https://graph.facebook.com/" + pictureId + "/picture?type=large").into(imageView);
+        textView.setText("Hello " + " " + name);
 
-        loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions(Arrays.asList(EMAIL));
-        loginButton.setPermissions(Arrays.asList("user_gender, user_friends"));
-        // If you are using in a fragment, call loginButton.setFragment(this);
 
-        // Callback registration
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        // To know if the user is logged in or logged out
+        AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
-                // App code
-                //Popup
-                Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                // Go inside the app
-                //openRecordPage();
-            }
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
+                // User is not logged in
+                if (currentAccessToken == null) {
+                    LoginManager.getInstance().logOut();
+                    Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
+                     textView.setText("");
+                     imageView.setImageResource(0);
 
-            @Override
-            public void onCancel() {
-                // App code
-                //Popup
-                Toast.makeText(MainActivity.this, "Login Cancel", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(FacebookException exception) {
-                // App code
-                //Popup
-                Toast.makeText(MainActivity.this, "Error: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Get information from facebook about user
-        GraphRequest graphRequest = new GraphRequest().newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-                Log.d("Demo", object.toString());
-                // Obtain info
-                try {
-                    // Remove welcome text
-                    helloToApp.setText("");
-                    // User picture
-                    String id = object.getString("id");
-                    // User name
-                    String name = object.getString("name");
-                    // Show it for the user
-                    textView.setText("Hello " + " " + name);
-                    // using picasso
-                    Picasso.get().load("https://graph.facebook.com/" + id + "/picture?type=large")
-                            .into(imageView);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                     // After login move to the login activity
+                    Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
+                    startActivity(intent);
+                    // kill this activity
+                     finish();
                 }
-
             }
-        });
+        };
 
-        // For passing information between two activities (from facebook to mainActivity)
-        Bundle bundle = new Bundle();
-        bundle.putString("fields", "gender, name, id, first_name, last_name");
 
-        // pass the bundle
-        graphRequest.setParameters(bundle);
-        // execute async (on a different intent in the background)
-        graphRequest.executeAsync();
 
     }
 
-    // Open Record activity
-    public void openRecordPage() {
-        Intent intent = new Intent(this, RecordsActivity.class);
-        startActivity(intent);
-    }
 
-    // To know if the user is logged in or logged out
-    AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
-        @Override
-        protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-            // User is not logged in
-            if (currentAccessToken == null) {
-                LoginManager.getInstance().logOut();
-                Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
-                textView.setText("");
-                imageView.setImageResource(0);
-            }
-        }
-    };
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        accessTokenTracker.stopTracking();
-    }
 }

@@ -6,88 +6,86 @@
     android:layout_height="match_parent"
     tools:context=".RecordsActivity">
 
-    <ImageButton
-        android:id="@+id/btn_record"
-        android:layout_width="78dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="84dp"
-        android:onClick="btnRecordPressed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_txt"
-        app:srcCompat="@drawable/ic_record" />
 
-    <ImageButton
-        android:id="@+id/btn_play"
-        android:layout_width="78dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="64dp"
-        android:onClick="btnPlayPressed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_txt"
-        app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
-
-    <ImageButton
-        android:id="@+id/btn_stop"
-        android:layout_width="78dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="52dp"
-        android:onClick="btnStopPressed"
-        app:layout_constraintEnd_toStartOf="@+id/btn_play"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_record"
-        app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_txt"
-        app:srcCompat="@drawable/ic_baseline_stop_24" />
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/voiceRecognition_stop"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="181dp"-->
+    <!--        android:layout_marginTop="8dp"-->
+    <!--        android:layout_marginEnd="182dp"-->
+    <!--        android:backgroundTint="#E91E63"-->
+    <!--        android:onClick="stopRecognizeButton"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.5"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_btn"-->
+    <!--        app:srcCompat="@drawable/ic_stop" />-->
 
     <TextView
         android:id="@+id/voiceRecognition_txt"
         android:layout_width="383dp"
         android:layout_height="69dp"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="91dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="14dp"
         android:text="@string/voiceRecognition"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/showPhone" />
-
+        app:layout_constraintTop_toBottomOf="@+id/loading_animation" />
 
     <Button
         android:id="@+id/voiceRecognition_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="158dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="168dp"
-        android:layout_marginBottom="120dp"
         android:onClick="startRecognizeButton"
         android:text="@string/voiceRecognition_btn"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_stop"
-        app:layout_constraintVertical_bias="0.698" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_stop" />
 
     <ImageButton
-        android:id="@+id/voiceRecognition_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="181dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="182dp"
-        android:backgroundTint="#E91E63"
-        android:onClick="stopRecognizeButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:id="@+id/btn_record"
+        android:layout_width="78dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="68dp"
+        android:onClick="btnRecordPressed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_btn"
-        app:srcCompat="@drawable/ic_stop" />
+        app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_txt"
+        app:srcCompat="@drawable/ic_record" />
+
+    <ImageButton
+        android:id="@+id/btn_stop"
+        android:layout_width="78dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="52dp"
+        android:onClick="btnStopPressed"
+        app:layout_constraintEnd_toStartOf="@+id/btn_play"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toEndOf="@+id/btn_record"
+        app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_txt"
+        app:srcCompat="@drawable/ic_baseline_stop_24" />
+
+    <ImageButton
+        android:id="@+id/btn_play"
+        android:layout_width="78dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="64dp"
+        android:onClick="btnPlayPressed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/voiceRecognition_txt"
+        app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -104,26 +102,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="59dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="294dp"
         android:text="hello"
         android:textColor="#FF69B4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/showPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="294dp"
-        android:text="100"
-        android:textColor="#FF69B4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/showkeyWord" />
 
     <!--        android:layout_width="400dp"-->
     <!--        android:layout_height="400dp"-->
@@ -132,5 +118,36 @@
     <!--        android:id="@+id/lottie"-->
     <!--        android:elevation="5dp"-->
     <!--        app:lottie_rawRes="@raw/record_on"/>-->
+
+    <TextView
+        android:id="@+id/showPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="294dp"
+        android:text="100"
+        android:textColor="#FF69B4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showkeyWord" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading_animation"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showPhone"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/record_on" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

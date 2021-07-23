@@ -31,12 +31,16 @@ public class WelcomeAnimation extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // After the Animation move to main activity
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                // After the Animation move to sign in activity activity
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);//WelcomeActivity.class);
                 startActivity(intent);
+                // finish with the intent
+                finish();
             }
             //5 sec
         }, 5000);
+
+        // TODO- check if user is logged in or not
 
     }
 }

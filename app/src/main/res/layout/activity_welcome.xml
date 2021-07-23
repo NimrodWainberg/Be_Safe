@@ -7,7 +7,27 @@
     tools:context=".WelcomeActivity">
 
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loading_animation"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginVertical="300dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        android:layout_centerHorizontal="true"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:lottie_repeatCount="2"
+        app:lottie_rawRes="@raw/activity_welcome" />
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="30dp"
+        app:srcCompat="@drawable/profile_pic" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
@@ -18,5 +38,6 @@
         android:layout_centerHorizontal="true"
         android:textSize="30sp"
        />
+
 
 </RelativeLayout>
