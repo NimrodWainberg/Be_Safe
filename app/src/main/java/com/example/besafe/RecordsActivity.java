@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,16 +55,19 @@ public class RecordsActivity extends AppCompatActivity {
     final int recognizerSpeechIntent = 1;
 
     // For keyWord, contact number from user
-     TextView showKeyWord, showPhone;
-     SharedPreferences sp;
-     String stringkeyWord, stringPhone;
+    TextView showKeyWord, showPhone;
+    SharedPreferences sp;
+    String stringkeyWord, stringPhone;
 
-     // For Lottie Animation
-     LottieAnimationView record_on_animation;
+    // For Lottie Animation
+    LottieAnimationView record_on_animation;
 
-     // For calling
+    // For calling
     private static final int REQUEST_PHONE_CALL = 1;
 
+    // For sms
+    private static final int REQUEST_SEND_SMS = 1;
+    String sms_txt = "Help";
 
 
     // Getting the data from voice recognition
@@ -107,20 +111,22 @@ public class RecordsActivity extends AppCompatActivity {
 
                     if (keyWord.equalsIgnoreCase(stringkeyWord)) {
 
-                        Log.d("MATCHWORD", keyWord +" ");
+                        Log.d("MATCHWORD", keyWord + " ");
                         // start record
                         handleBtnRecordPressed();
                         Toast.makeText(RecordsActivity.this, " Record as been started with: " + keyWord, Toast.LENGTH_SHORT).show();
 
                         // call to emergency number
-                        callEmergency();
+                        //callEmergency();
+                        // send emergency sms
+                        sendEmergency();
                     }
                 } else {
                     Log.d("RECOGNIZER", "Empty results");
                 }
             } else {
                 Log.d("OK", "Line 63 not ok: ");
-                Log.d("RecognizerSpeechIntent", recognizerSpeechIntent +"");
+                Log.d("RecognizerSpeechIntent", recognizerSpeechIntent + "");
 
             }
         }
@@ -159,8 +165,8 @@ public class RecordsActivity extends AppCompatActivity {
         // intentRecognizer.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         // Language for voice recognition is EN
         intentRecognizer.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en")
-          // for 1 word
-         .putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);//.putExtra(RecognizerIntent.);
+                // for 1 word
+                .putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);//.putExtra(RecognizerIntent.);
 
 
         // for voice recognition
@@ -206,8 +212,15 @@ public class RecordsActivity extends AppCompatActivity {
 
         // Calling permission
         if (ContextCompat.checkSelfPermission(RecordsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(RecordsActivity.this, new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
+            ActivityCompat.requestPermissions(RecordsActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
         }
+
+        // Sms permission
+        if (ContextCompat.checkSelfPermission(RecordsActivity.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(RecordsActivity.this, new String[]{Manifest.permission.SEND_SMS}, REQUEST_SEND_SMS);
+        }
+
+
     }
 
     // Voice Recognition button pressed
@@ -223,18 +236,39 @@ public class RecordsActivity extends AppCompatActivity {
     }
 
     // For calling to a emergency number
-    public void callEmergency(){
+    public void callEmergency() {
         // check if there is a number
-        if (stringPhone == null) {
+        if (stringPhone == "") {
             Toast.makeText(getApplicationContext(), "Please enter a number first !", Toast.LENGTH_LONG).show();
-        } else {
-            String s = "tel:" + stringPhone;
-            // Intent for calling
-           Intent intent = new Intent(Intent.ACTION_CALL);
-           intent.setData(Uri.parse(s));
-           startActivity(intent);
+            stringPhone = "100";
         }
+
+            String s = "tel:" + stringPhone.trim();
+            // Intent for calling
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse(s));
+            startActivity(intent);
+
     }
+
+    // For Sending sms to a emergency number
+    public void sendEmergency() {
+        // check if there is a number
+        if (stringPhone == "") {
+            Toast.makeText(getApplicationContext(), "Please enter a number first !", Toast.LENGTH_LONG).show();
+        }
+        if (sms_txt == "") {
+            Toast.makeText(getApplicationContext(), "Please enter a message first !", Toast.LENGTH_LONG).show();
+            sms_txt = "Help";
+        }
+
+        // Initialize sms manager
+        SmsManager smsManager = SmsManager.getDefault();
+        // send text message
+        smsManager.sendTextMessage(stringPhone, null, sms_txt,null,null);
+        Toast.makeText(getApplicationContext(), "SMS was sent", Toast.LENGTH_LONG).show();
+    }
+
 
     // Voice Recognition button stopped pressed
     public void stopRecognizeButton(View view) {
@@ -249,13 +283,13 @@ public class RecordsActivity extends AppCompatActivity {
         handleBtnRecordPressed();
     }
 
-    private void handleBtnRecordPressed(){
+    private void handleBtnRecordPressed() {
         try {
             // play animation
             record_on_animation.playAnimation();
             // TODO
             // change record button image
-            record_on.setBackgroundResource(R.drawable.ic_red_record);
+            record_on.setDrawingCacheBackgroundColor(R.drawable.ic_red_record);
 
             mediaRecorder = new MediaRecorder();
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -289,7 +323,7 @@ public class RecordsActivity extends AppCompatActivity {
             mediaRecorder = null;
 
             Toast.makeText(this, "Recording is stopped", Toast.LENGTH_LONG).show();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

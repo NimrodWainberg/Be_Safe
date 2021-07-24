@@ -11,7 +11,6 @@
     <string name="voiceRecognition_btn">זיהוי קולי</string>
     <string name="txt_language">עברית</string>
     <string name="selectedlanguage">עברית</string>
-    <string name="welcome_txt">ברוכים הבאים</string>
     <string name="nav_home">בית</string>
     <string name="nav_records">הקלטות</string>
     <string name="nav_send">טקסט</string>

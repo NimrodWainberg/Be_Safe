@@ -8,9 +8,8 @@
     <string name="btn_play">Play</string>
     <string name="voiceRecognition">Voice recognition</string>
     <string name="voiceRecognition_btn">Voice recognition</string>
-    <string name="txt_language">ENGLISH</string>
+    <string name="txt_language">English</string>
     <string name="selectedlanguage">English</string>
-    <string name="welcome_txt">Hello And Welcome</string>
     <string name="nav_home">Home</string>
     <string name="nav_records">Records</string>
     <string name="nav_send">Text</string>

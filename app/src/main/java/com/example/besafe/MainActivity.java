@@ -26,6 +26,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -50,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     Resources resources;
 
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.help_menu, menu);
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +71,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Translate dialog
         language_dialog = (TextView) findViewById(R.id.dialog_language);
-        helloToApp = (TextView) findViewById(R.id.welcome_txt);
+        // helloToApp = (TextView) findViewById(R.id.welcome_txt);
 
         language_dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String[] language = {"ENGLISH", "עברית"};
+                final String[] language = {"English", "עברית"};
 
                 int checkedItem;
 
@@ -87,20 +98,24 @@ public class MainActivity extends AppCompatActivity {
                         language_dialog.setText(language[which]);
 
                         // use the suitable strings.xml
-                        if(language[which].equals("ENGLISH")){
+                        if(language[which].equals("English")){
 
                             context = LocaleHelper.setLocale(MainActivity.this,"en");
                             resources = context.getResources();
+                            Log.d("Language", "English ");
 
-                            helloToApp.setText(resources.getString(R.string.welcome_txt));
+                        // TODO
+                        //    helloToApp.setText(resources.getString(R.string.welcome_txt));
                         }
 
                         if (language[which].equals("עברית")){
 
+                            Log.d("Language", "Hebrew ");
+
                             context = LocaleHelper.setLocale(MainActivity.this,"iw-rlL");
                             resources = context.getResources();
 
-                            helloToApp.setText(resources.getString(R.string.welcome_txt));
+                        //    helloToApp.setText(resources.getString(R.string.welcome_txt));
                         }
                     }
                 })
@@ -149,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
 
         //Facebook
 
