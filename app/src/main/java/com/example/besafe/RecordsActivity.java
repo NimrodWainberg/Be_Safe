@@ -19,8 +19,10 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,12 +31,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import static android.Manifest.permission.RECORD_AUDIO;
 
@@ -57,7 +65,7 @@ public class RecordsActivity extends AppCompatActivity {
     // For keyWord, contact number from user
     TextView showKeyWord, showPhone;
     SharedPreferences sp;
-    String stringkeyWord, stringPhone;
+    String stringkeyWord = "", stringPhone = "";
 
     // For Lottie Animation
     LottieAnimationView record_on_animation;
@@ -68,6 +76,12 @@ public class RecordsActivity extends AppCompatActivity {
     // For sms
     private static final int REQUEST_SEND_SMS = 1;
     String sms_txt = "Help";
+
+    // Listview for contact
+    private ListView listView_contact;
+    private static ArrayList<String> kewWordsHistory = new ArrayList<>();
+    private ArrayAdapter<String> adapter;
+    private Set<String> wordSetList = new HashSet<>();
 
 
     // Getting the data from voice recognition
@@ -142,17 +156,44 @@ public class RecordsActivity extends AppCompatActivity {
         showPhone = findViewById(R.id.showPhone);
         // extract the data from sharedPreferences
         sp = getSharedPreferences("BeSafeConfiguration", Context.MODE_PRIVATE);
+
         stringkeyWord = sp.getString("safe_word", "");
+
+        // Check if have changed
+        if (wordSetList.contains(stringkeyWord)) {
+            stringkeyWord = "";
+
+        }else
+        wordSetList.add(stringkeyWord);
+
+
         stringPhone = sp.getString("emergency_phone", "");
 
+
+        Log.d("STRINGKEY", stringkeyWord + "HELLO");
+
         // set text
-        if (stringkeyWord != null) {
+        if (!stringkeyWord.equals("")) {
             showKeyWord.setText(stringkeyWord);
+
+            // listView messages
+            listView_contact = findViewById(R.id.listview_contact);
+
+            // Adding word information in the list to display with time
+            String word_History = stringkeyWord + "\n" + (new SimpleDateFormat("EEE, d MMM yyyy HH:mm")
+                    .format(Calendar.getInstance().getTime()));
+            kewWordsHistory.add(word_History);
+            adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, kewWordsHistory);
+            adapter.notifyDataSetChanged();
+            listView_contact.setAdapter(adapter);
         }
 
-        if (stringkeyWord != null) {
+        if (!stringPhone.equals("")) {
             showPhone.setText(stringPhone);
         }
+
+
+
 
         // Lottie Animation
         record_on_animation = findViewById(R.id.record_animation);

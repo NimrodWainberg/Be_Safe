@@ -27,7 +27,7 @@
         android:layout_width="383dp"
         android:layout_height="69dp"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="14dp"
         android:text="@string/voiceRecognition"
         android:textAlignment="center"
@@ -47,7 +47,7 @@
         android:onClick="startRecognizeButton"
         android:text="@string/voiceRecognition_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_stop" />
 
@@ -138,13 +138,25 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="52dp"
         android:scaleX="2"
         android:scaleY="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/showPhone"
+        app:layout_constraintTop_toBottomOf="@+id/listview_contact"
         app:lottie_rawRes="@raw/record_on" />
+
+    <ListView
+        android:id="@+id/listview_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="156dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showPhone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

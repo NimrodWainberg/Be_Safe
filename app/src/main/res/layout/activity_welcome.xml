@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ff9666"
     tools:context=".WelcomeActivity">
 
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/record_animation"
+        android:id="@+id/welcome_animation"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginVertical="300dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
+        android:scaleX="4"
+        android:scaleY="4"
         android:layout_centerHorizontal="true"
-        android:scaleX="2"
-        android:scaleY="2"
         app:lottie_repeatCount="2"
-        app:lottie_rawRes="@raw/activity_welcome" />
+        app:lottie_rawRes="@raw/welcome_new" />
 
     <ImageView
         android:id="@+id/logo"
