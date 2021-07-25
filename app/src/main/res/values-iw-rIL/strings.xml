@@ -11,6 +11,7 @@
     <string name="voiceRecognition_btn">זיהוי קולי</string>
     <string name="txt_language">עברית</string>
     <string name="selectedlanguage">עברית</string>
+    <string name="facebook_hello">Shalom</string>
     <string name="nav_home">בית</string>
     <string name="nav_records">הקלטות</string>
     <string name="nav_send">טקסט</string>

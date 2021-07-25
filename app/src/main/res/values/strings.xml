@@ -10,6 +10,7 @@
     <string name="voiceRecognition_btn">Voice recognition</string>
     <string name="txt_language">English</string>
     <string name="selectedlanguage">English</string>
+    <string name="facebook_hello">Hello</string>
     <string name="nav_home">Home</string>
     <string name="nav_records">Records</string>
     <string name="nav_send">Text</string>

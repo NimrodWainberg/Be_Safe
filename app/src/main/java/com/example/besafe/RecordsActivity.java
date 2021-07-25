@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static android.Manifest.permission.RECORD_AUDIO;
@@ -94,7 +95,7 @@ public class RecordsActivity extends AppCompatActivity {
     private Set<String> wordSetList = new HashSet<>();
 
     // shared preference
-
+    SharedPreferences sharedPreferencesList;
 
 
     // Getting the data from voice recognition
@@ -215,6 +216,15 @@ public class RecordsActivity extends AppCompatActivity {
         // get from shared preferences
         stringkeyWord = sp.getString("safe_word", "");
 
+        // get phone from sp
+        stringPhone = sp.getString("emergency_phone", "");
+
+
+        // new sharedPre for the list
+//        sharedPreferencesList = getSharedPreferences("BeSafeConfiguration", Context.MODE_PRIVATE);
+//        // Shared Preferences editor
+//        SharedPreferences.Editor editor = sharedPreferencesList.edit();
+//        editor.putStringSet();
 
         // Check if have changed
         if (wordSetList.contains(stringkeyWord)) {
@@ -225,8 +235,7 @@ public class RecordsActivity extends AppCompatActivity {
             wordSetList.add(stringkeyWord);
         Log.d("STRINGKEEY", wordSetList + "");
 
-        // get phone from sp
-        stringPhone = sp.getString("emergency_phone", "");
+
 
 
         Log.d("STRINGKEY", stringkeyWord + " ");
@@ -390,7 +399,7 @@ public class RecordsActivity extends AppCompatActivity {
             record_on_animation.playAnimation();
             // TODO
             // change record button image
-            record_on.setDrawingCacheBackgroundColor(R.drawable.ic_red_record);
+            record_on.setImageResource(R.drawable.ic_red_record);
 
             mediaRecorder = new MediaRecorder();
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
