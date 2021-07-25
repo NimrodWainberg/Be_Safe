@@ -159,4 +159,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/showPhone" />
 
+    <TextView
+        android:id="@+id/safeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="253dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/word_Title"
+        android:textSize="14dp"
+        android:textColor="#0000FF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/showkeyWord"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/phoneTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="253dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/phone_Title"
+        android:textSize="14dp"
+        android:textColor="#0000FF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.837"
+        app:layout_constraintStart_toEndOf="@+id/showPhone"
+        app:layout_constraintTop_toBottomOf="@+id/safeTitle" />
+
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="16dp"
+        android:thumb="@drawable/thunb"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listview_contact"
+        app:showText="true"
+        android:textOn="on"
+        android:textOff="off"
+        app:track="@drawable/track" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:textOff="off"
+        android:textOn="on"
+        android:thumb="@drawable/thunb"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchPhone"
+        app:showText="true"
+        app:track="@drawable/track" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

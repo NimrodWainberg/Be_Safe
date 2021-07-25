@@ -18,4 +18,10 @@
     <string name="save_text">Save</string>
     <string name="safe_word">Please enter a safe word</string>
     <string name="phone_emergency">Please enter a phone number for emergency</string>
+    <string name="word_Title">Key Word</string>
+    <string name="phone_Title">Contact Phone</string>
+    <string name="callFeatureOn">Call contact on Voice recognition is On</string>
+    <string name="callFeatureOff">Call contact on Voice recognition is Off</string>
+    <string name="sendFeatureOn">Send message on Voice recognition is On</string>
+    <string name="sendFeatureOff">Send message on Voice recognition is Off</string>
 </resources>

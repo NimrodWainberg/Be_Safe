@@ -6,6 +6,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -21,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,12 +31,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -77,6 +81,12 @@ public class RecordsActivity extends AppCompatActivity {
     private static final int REQUEST_SEND_SMS = 1;
     String sms_txt = "Help";
 
+    // switch buttons
+    SwitchCompat phoneSwitch, messageSwitch;
+    static int messageFeature = 0;
+    static int phoneFeature = 0;
+
+
     // Listview for contact
     private ListView listView_contact;
     private static ArrayList<String> kewWordsHistory = new ArrayList<>();
@@ -88,6 +98,7 @@ public class RecordsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
 
         Log.d("ONACTIVITY", "onActivityResult: ");
 
@@ -130,10 +141,18 @@ public class RecordsActivity extends AppCompatActivity {
                         handleBtnRecordPressed();
                         Toast.makeText(RecordsActivity.this, " Record as been started with: " + keyWord, Toast.LENGTH_SHORT).show();
 
-                        // call to emergency number
-                        //callEmergency();
-                        // send emergency sms
-                        sendEmergency();
+                        // check switches
+                        if (phoneFeature == 1) {
+
+                            // call to emergency number
+                            callEmergency();
+                        }
+
+                        if (messageFeature == 1) {
+
+                            // send emergency sms
+                            sendEmergency();
+                        }
                     }
                 } else {
                     Log.d("RECOGNIZER", "Empty results");
@@ -150,6 +169,41 @@ public class RecordsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_records);
+        View parentLayout = findViewById(android.R.id.content);
+
+        // Switch buttons
+        phoneSwitch = findViewById(R.id.switchPhone);
+        messageSwitch = findViewById(R.id.switchMessage);
+
+        phoneSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked == true) {
+                    Snackbar.make(parentLayout, getResources().getString(R.string.callFeatureOn), Snackbar.LENGTH_LONG).show();
+                    phoneFeature = 1;
+                } else {
+                    Snackbar.make(parentLayout, getResources().getString(R.string.callFeatureOff), Snackbar.LENGTH_LONG).show();
+                    phoneFeature = 0;
+                }
+
+            }
+        });
+
+
+        messageSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked == true) {
+                    Snackbar.make(parentLayout, getResources().getString(R.string.sendFeatureOn), Snackbar.LENGTH_LONG).show();
+                    messageFeature = 1;
+                } else {
+                    Snackbar.make(parentLayout, getResources().getString(R.string.sendFeatureOff), Snackbar.LENGTH_LONG).show();
+                    messageFeature = 0;
+                }
+
+            }
+        });
+
 
         // For keyWord, contact number from user
         showKeyWord = findViewById(R.id.showkeyWord);
@@ -157,20 +211,25 @@ public class RecordsActivity extends AppCompatActivity {
         // extract the data from sharedPreferences
         sp = getSharedPreferences("BeSafeConfiguration", Context.MODE_PRIVATE);
 
+        // get from shared preferences
         stringkeyWord = sp.getString("safe_word", "");
+
 
         // Check if have changed
         if (wordSetList.contains(stringkeyWord)) {
+            Log.d("STRINGKEEY", wordSetList + "");
             stringkeyWord = "";
 
-        }else
-        wordSetList.add(stringkeyWord);
+        } else
+            wordSetList.add(stringkeyWord);
+        Log.d("STRINGKEEY", wordSetList + "");
 
-
+        // get phone from sp
         stringPhone = sp.getString("emergency_phone", "");
 
 
-        Log.d("STRINGKEY", stringkeyWord + "HELLO");
+        Log.d("STRINGKEY", stringkeyWord + " ");
+        Log.d("STRINGKEY", kewWordsHistory + " ");
 
         // set text
         if (!stringkeyWord.equals("")) {
@@ -183,7 +242,7 @@ public class RecordsActivity extends AppCompatActivity {
             String word_History = stringkeyWord + "\n" + (new SimpleDateFormat("EEE, d MMM yyyy HH:mm")
                     .format(Calendar.getInstance().getTime()));
             kewWordsHistory.add(word_History);
-            adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, kewWordsHistory);
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, kewWordsHistory);
             adapter.notifyDataSetChanged();
             listView_contact.setAdapter(adapter);
         }
@@ -191,8 +250,6 @@ public class RecordsActivity extends AppCompatActivity {
         if (!stringPhone.equals("")) {
             showPhone.setText(stringPhone);
         }
-
-
 
 
         // Lottie Animation
@@ -284,11 +341,11 @@ public class RecordsActivity extends AppCompatActivity {
             stringPhone = "100";
         }
 
-            String s = "tel:" + stringPhone.trim();
-            // Intent for calling
-            Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse(s));
-            startActivity(intent);
+        String s = "tel:" + stringPhone.trim();
+        // Intent for calling
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse(s));
+        startActivity(intent);
 
     }
 
@@ -306,7 +363,7 @@ public class RecordsActivity extends AppCompatActivity {
         // Initialize sms manager
         SmsManager smsManager = SmsManager.getDefault();
         // send text message
-        smsManager.sendTextMessage(stringPhone, null, sms_txt,null,null);
+        smsManager.sendTextMessage(stringPhone, null, sms_txt, null, null);
         Toast.makeText(getApplicationContext(), "SMS was sent", Toast.LENGTH_LONG).show();
     }
 

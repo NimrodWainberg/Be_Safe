@@ -19,5 +19,11 @@
     <string name="save_text">שמירה</string>
     <string name="safe_word">נא להקליד מילת מפתח</string>
     <string name="phone_emergency">נא להקליד מספר חירום</string>
+    <string name="word_Title">מילת מפתח</string>
+    <string name="phone_Title">מספר קשר</string>
+    <string name="callFeatureOn">התקשרות בזיהוי קולי מופעלת</string>
+    <string name="callFeatureOff">התקשרות בזיהוי קולי כבויה</string>
+    <string name="sendFeatureOn">שליחת הודעה בזיהוי קולי מופעלת</string>
+    <string name="sendFeatureOff">שליחת הודעה בזיהוי קולי כבויה</string>
 
 </resources>

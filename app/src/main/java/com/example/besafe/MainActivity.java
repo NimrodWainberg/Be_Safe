@@ -196,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //  For second menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

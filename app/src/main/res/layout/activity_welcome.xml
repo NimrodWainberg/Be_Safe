@@ -15,8 +15,8 @@
         android:layout_marginVertical="300dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
-        android:scaleX="4"
-        android:scaleY="4"
+        android:scaleX="2"
+        android:scaleY="2"
         android:layout_centerHorizontal="true"
         app:lottie_repeatCount="2"
         app:lottie_rawRes="@raw/welcome_new" />
