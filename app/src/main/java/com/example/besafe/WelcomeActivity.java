@@ -56,7 +56,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 // App code
                 //Popup
                 // Toast.makeText(WelcomeActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                Snackbar.make(parentLayout, "Login Successful", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(parentLayout, getResources().getString(R.string.login_succesful), Snackbar.LENGTH_SHORT).show();
                 // Go inside the app
                 //openRecordPage();
             }
@@ -66,7 +66,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 // App code
                 //Popup
                // Toast.makeText(WelcomeActivity.this, "Login Cancel", Toast.LENGTH_SHORT).show();
-                Snackbar.make(parentLayout, "Login Cancel", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(parentLayout, getResources().getString(R.string.login_cancel), Snackbar.LENGTH_SHORT).show();
 
             }
 
@@ -75,7 +75,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 // App code
                 //Popup
                 //Toast.makeText(MainActivity.this, "Error: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
-                Snackbar.make(parentLayout,  "Error: " + exception.getMessage(), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(parentLayout,  getResources().getString(R.string.login_error) + exception.getMessage(), Snackbar.LENGTH_SHORT).show();
 
             }
         });
@@ -144,7 +144,7 @@ public class WelcomeActivity extends AppCompatActivity {
             // User is not logged in
             if (currentAccessToken == null) {
                 LoginManager.getInstance().logOut();
-                Toast.makeText(WelcomeActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WelcomeActivity.this, getResources().getString(R.string.login_out), Toast.LENGTH_SHORT).show();
                // textView.setText("");
                // imageView.setImageResource(0);
             }

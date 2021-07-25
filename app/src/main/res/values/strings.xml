@@ -19,6 +19,10 @@
     <string name="safe_word">Please enter a safe word</string>
     <string name="phone_emergency">Please enter a phone number for emergency</string>
     <string name="word_Title">Key Word</string>
+    <string name="login_succesful">Login Successful</string>
+    <string name="login_cancel">Login Cancel</string>
+    <string name="login_error">Login Cancel</string>
+    <string name="login_out">Logged out</string>
     <string name="phone_Title">Contact Phone</string>
     <string name="callFeatureOn">Call contact on Voice recognition is On</string>
     <string name="callFeatureOff">Call contact on Voice recognition is Off</string>
