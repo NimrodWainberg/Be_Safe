@@ -93,6 +93,9 @@ public class RecordsActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private Set<String> wordSetList = new HashSet<>();
 
+    // shared preference
+
+
 
     // Getting the data from voice recognition
     @Override
@@ -126,11 +129,9 @@ public class RecordsActivity extends AppCompatActivity {
                     // Write the text inside
                     textView.setText(keyWord);
 
-                    // TODO: make a call/ send message to emergency contact
-
 
                     // check for key word
-                    if (stringkeyWord == "") {
+                    if (stringkeyWord.equals("")) {
                         stringkeyWord = "hello";
                     }
 

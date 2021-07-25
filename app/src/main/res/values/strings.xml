@@ -28,4 +28,6 @@
     <string name="callFeatureOff">Call contact on Voice recognition is Off</string>
     <string name="sendFeatureOn">Send message on Voice recognition is On</string>
     <string name="sendFeatureOff">Send message on Voice recognition is Off</string>
+    <string name="switchTextPhone">Call</string>
+    <string name="switchTextMessage">Message</string>
 </resources>

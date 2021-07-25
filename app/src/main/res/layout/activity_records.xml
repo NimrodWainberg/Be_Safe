@@ -159,17 +159,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/showPhone" />
 
+
     <TextView
         android:id="@+id/safeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="253dp"
+        android:layout_marginStart="240dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="20dp"
         android:text="@string/word_Title"
-        android:textSize="14dp"
         android:textColor="#0000FF"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/showkeyWord"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -181,13 +183,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:text="@string/phone_Title"
-        android:textSize="14dp"
         android:textColor="#0000FF"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.837"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/showPhone"
         app:layout_constraintTop_toBottomOf="@+id/safeTitle" />
-
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchPhone"
@@ -215,5 +216,29 @@
         app:layout_constraintTop_toBottomOf="@+id/switchPhone"
         app:showText="true"
         app:track="@drawable/track" />
+
+    <TextView
+        android:id="@+id/switchTextPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="232dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/switchTextPhone"
+        android:textColor="#0000FF"
+        android:textSize="14dp"
+        app:layout_constraintStart_toEndOf="@+id/switchPhone"
+        app:layout_constraintTop_toBottomOf="@+id/listview_contact" />
+
+    <TextView
+        android:id="@+id/switchTextMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:textColor="#0000FF"
+        android:textSize="14dp"
+        android:layout_marginTop="23dp"
+        android:text="@string/switchTextMessage"
+        app:layout_constraintStart_toEndOf="@+id/record_animation"
+        app:layout_constraintTop_toBottomOf="@+id/switchTextPhone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
