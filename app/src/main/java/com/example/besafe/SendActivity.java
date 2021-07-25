@@ -48,6 +48,7 @@ public class SendActivity extends AppCompatActivity {
                         // open the correct activity
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0, 0);
+                        finish();
                         return true;
 
 
@@ -55,6 +56,7 @@ public class SendActivity extends AppCompatActivity {
                         // open the correct activity
                         startActivity(new Intent(getApplicationContext(), RecordsActivity.class));
                         overridePendingTransition(0, 0);
+                        finish();
                         return true;
 
                     case R.id.sendActivity:

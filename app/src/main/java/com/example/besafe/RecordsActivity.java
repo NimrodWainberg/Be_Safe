@@ -285,6 +285,7 @@ public class RecordsActivity extends AppCompatActivity {
                         // open the correct activity
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0, 0);
+                        finish();
                         return true;
 
 
@@ -295,6 +296,7 @@ public class RecordsActivity extends AppCompatActivity {
                         // open the correct activity
                         startActivity(new Intent(getApplicationContext(), SendActivity.class));
                         overridePendingTransition(0, 0);
+                        finish();
                         return true;
                 }
                 return false;
