@@ -173,7 +173,7 @@ public class RecordsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_records);
         View parentLayout = findViewById(android.R.id.content);
 
-        // Switch buttons
+        // Switch buttons for calling and messaging on voice recognition
         phoneSwitch = findViewById(R.id.switchPhone);
         messageSwitch = findViewById(R.id.switchMessage);
 
@@ -320,7 +320,7 @@ public class RecordsActivity extends AppCompatActivity {
         }
 
 
-        // Calling permission
+             // Calling permission
         if (ContextCompat.checkSelfPermission(RecordsActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(RecordsActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
         }
@@ -348,7 +348,7 @@ public class RecordsActivity extends AppCompatActivity {
     // For calling to a emergency number
     public void callEmergency() {
         // check if there is a number
-        if (stringPhone == "") {
+        if (stringPhone.equals("")) {
             Toast.makeText(getApplicationContext(), "Please enter a number first !", Toast.LENGTH_LONG).show();
             stringPhone = "100";
         }
@@ -364,10 +364,10 @@ public class RecordsActivity extends AppCompatActivity {
     // For Sending sms to a emergency number
     public void sendEmergency() {
         // check if there is a number
-        if (stringPhone == "") {
+        if (stringPhone.equals("")) {
             Toast.makeText(getApplicationContext(), "Please enter a number first !", Toast.LENGTH_LONG).show();
         }
-        if (sms_txt == "") {
+        if (sms_txt.equals("")) {
             Toast.makeText(getApplicationContext(), "Please enter a message first !", Toast.LENGTH_LONG).show();
             sms_txt = "Help";
         }

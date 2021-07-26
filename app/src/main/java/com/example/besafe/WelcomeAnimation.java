@@ -32,15 +32,12 @@ public class WelcomeAnimation extends AppCompatActivity {
             @Override
             public void run() {
                 // After the Animation move to sign in activity activity
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);//WelcomeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);//WelcomeActivity.class);
                 startActivity(intent);
                 // finish with the intent
                 finish();
             }
             //5 sec
         }, 5000);
-
-        // TODO- check if user is logged in or not
-
     }
 }
