@@ -141,7 +141,7 @@ public class RecordsActivity extends AppCompatActivity {
                         Log.d("MATCHWORD", keyWord + " ");
                         // start record
                         handleBtnRecordPressed();
-                        Toast.makeText(RecordsActivity.this, " Record as been started with: " + keyWord, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RecordsActivity.this, " Record has been started with: " + keyWord, Toast.LENGTH_SHORT).show();
 
                         // check switches
                         if (phoneFeature == 1) {
@@ -411,8 +411,8 @@ public class RecordsActivity extends AppCompatActivity {
             mediaRecorder.prepare();
             mediaRecorder.start();
 
-            // Popup to inform that the record as been started
-            Toast.makeText(this, "Recording is started", Toast.LENGTH_LONG).show();
+            // Popup to inform that the record has been started
+            Toast.makeText(this, "Recording started", Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
